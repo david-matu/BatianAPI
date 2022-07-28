@@ -22,7 +22,7 @@ import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 //import com.mysql.cj.jdbc.Driver;	//Testing if Driver is correctly resolved
-
+	
 public class BatianAPIApplication extends Application<BatianAPIConfiguration> {
 	private static final Logger logger = LoggerFactory.getLogger(BatianAPIApplication.class);
 	

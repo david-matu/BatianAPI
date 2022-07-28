@@ -6,23 +6,24 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.dave.apis</groupId>
-    <artifactId>batian</artifactId>
+    <groupId>com.dave.apis.BatianAPI</groupId>
+    <artifactId>BatianAPI</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>BatianAPI</name>
-    <description>For learning full-stack (CRUD) operational API  development</description>
+    <name>BatianAPIAPI</name>
+    <description>BatianAPI project. Auto-Generated on Thu Jul 28 15:46:17 EAT 2022 by Dave's CodeGen for Dropwizard API Apps (https://github.com/david-matu/)</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>2.1.0</dropwizard.version>
         <dropwizard-jdbi.version>2.0.0-rc9</dropwizard-jdbi.version>
-        <smoketurner-swagger.version>2.0.0-1</smoketurner-swagger.version>
-        <mainClass>com.dave.apis.batian.BatianAPIApplication</mainClass>
+        <mysql-connector.version>8.0.29</mysql-connector.version>
+        <smoketurner-swagger.version>2.0.12-1</smoketurner-swagger.version>
+        <mainClass>com.dave.apis.BatianAPI.BatianAPIApplication</mainClass>
     </properties>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -40,13 +41,11 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
         </dependency>
-        
         <dependency>
 		    <groupId>io.dropwizard</groupId>
 		    <artifactId>dropwizard-jdbi</artifactId>
 		    <version>${dropwizard-jdbi.version}</version>
 		</dependency>
-        
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -59,30 +58,31 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
+        
         <dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
-		    <version>8.0.29</version>
+		    <version>${mysql-connector.version}</version>
 		</dependency>
 		
-		<!-- <dependency>
-			      <groupId>io.swagger.core.v3</groupId>
-			      <artifactId>swagger-jaxrs2</artifactId>
-			      <version>2.1.1</version>
-			    </dependency>
-			    <dependency>
-			      <groupId>io.swagger.core.v3</groupId>
-			      <artifactId>swagger-jaxrs2-servlet-initializer</artifactId>
-			      <version>2.1.1</version>
-			    </dependency>
-			     -->
-			     
-	    <dependency>
+		<dependency>
 		    <groupId>com.smoketurner</groupId>
 		    <artifactId>dropwizard-swagger</artifactId>
 		    <version>${smoketurner-swagger.version}</version>
 		</dependency>
-	    
+		
+		<!-- <dependency>
+		    <groupId>org.springframework.batch</groupId>
+		    <artifactId>spring-batch-core</artifactId>
+		    <version>4.3.6</version>
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.springframework</groupId>
+		            <artifactId>spring-beans</artifactId>
+		        </exclusion>
+		    </exclusions>
+		</dependency> -->
+
     </dependencies>
 
     <build>
@@ -167,6 +167,50 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <!-- It is said that this will generate a swagger.json file  | | Source: https://copyprogramming.com/howto/swagger-integration-into-dropwizard
+            <plugin>
+            			    <groupId>com.github.kongchen</groupId>
+            			    <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.8</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>false</springmvc>
+                            <locations>
+                                <location>me.pabloestrada.api.*</location>
+                            </locations>
+                            <schemes>http,https</schemes>
+                            <outputFormats>json</outputFormats>
+                            <basePath>/</basePath>
+                            <host>127.0.0.1:8000</host>
+                            <info>
+                                <title>APIs</title>
+                                <version>1.0.0</version>
+                                <description>APIs</description>
+                                <contact>
+                                    <email>support@stackoverflow.com</email>
+                                    <name>Support</name>
+                                </contact>
+                                <license>
+                                    <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+                                    <name>Apache 2.0</name>
+                                </license>
+                            </info>
+                            <swaggerDirectory>swagger</swaggerDirectory>
+                            <swaggerFileName>swaggerspec</swaggerFileName>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin> -->
         </plugins>
     </build>
 
@@ -202,3 +246,4 @@
         </profile>
     </profiles>
 </project>
+

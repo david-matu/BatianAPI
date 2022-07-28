@@ -4,22 +4,21 @@ logging:
   appenders:
     - type: console
       threshold: ALL
-      timeZone: IST
-  
+      timeZone: EAT
 #  loggers:
 #    com.dave.apis: DEBUG
 
 server:
   type: simple
-  applicationContextPath: /batian
-  adminContextPath: /admin
+  applicationContextPath: /BatianAPI
+  adminContextPath: /BatianAPI/admin
   connector: 
     port: 12345
     type: http
     
 database:
   driverClass: com.mysql.cj.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/eshop_db?autoReconnect=true&useSSL=false
+  url: jdbc:mysql://localhost:3306/batian_db?autoReconnect=true&useSSL=false
   user: root
   password: root 
   maxWaitForConnection: 1s
@@ -33,4 +32,4 @@ database:
   checkConnectionOnBorrow: true
   
 swagger:
-  resourcePackage: com.dave.apis.batian.service
+  resourcePackage: com.dave.apis.BatianAPI.resources

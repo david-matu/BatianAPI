@@ -1,0 +1,178 @@
+MYSQL SQL UTILITY FUNCTIONS (DAVID MATU, 20-Jul-2022)
+________________________________________________________________________________________________________________________________________________________________________
+#GENERATE UNIQUE USER ID FUNCTION
+This code will generate unique user IDs with the first 10 digits representing timestamp and the last six are random
+________________________________________________________________________________________________________________________________________________________________________
+DELIMITER //
+CREATE FUNCTION genUserID()	RETURNS BIGINT
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+	DECLARE UID BIGINT DEFAULT 0;
+	DECLARE TIME_NOW VARCHAR(20);
+	DECLARE STRING_1 VARCHAR(20);
+	DECLARE STRING_2 VARCHAR(20);
+
+	SET TIME_NOW = UNIX_TIMESTAMP(now());
+
+	SET UID = FLOOR(RAND() * 999999);
+
+	SET STRING_1 = '' + TIME_NOW;
+	SET STRING_2 = '' + UID;
+
+	SET STRING_1 = CONCAT(STRING_1, STRING_2);
+
+	RETURN CAST(STRING_1 AS UNSIGNED INTEGER);
+
+END; //
+________________________________________________________________________________________________________________________________________________________________________
+#RESULT
+mysql> select genUserId() //
++------------------+
+| genUserId()      |
++------------------+
+| 1658308675792585 |
++------------------+
+
+________________________________________________________________________________________________________________________________________________________________________
+#GENERATE A UNIQUE 9-DIGIT PRODUCT ID
+
+What I considered: 9-Digits are 900,000,000 or 999,999,999 :: These are like 999K products with IDs, I think we can increase to like 14-digits
+________________________________________________________________________________________________________________________________________________________________________
+DELIMITER //
+DROP FUNCTION IF EXISTS genProductID //
+CREATE FUNCTION genProductID()	RETURNS BIGINT
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+	DECLARE UID BIGINT DEFAULT 0;
+
+	SET UID = FLOOR(RAND() * 99999999999999);
+
+	RETURN UID;
+
+END; //
+
+DELIMITER; //
+
+
+___________
+#ALT
+___________
+DELIMITER //
+DROP FUNCTION IF EXISTS genNewProductID //
+CREATE FUNCTION genNewProductID()	RETURNS BIGINT
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+	DECLARE UID BIGINT DEFAULT 0;
+	DECLARE EXISTING_ID BIGINT DEFAULT 0;
+
+	SET UID = FLOOR(RAND() * 9999999999999);
+
+	SET EXISTING_ID = (SELECT PRODUCT_ID FROM PRODUCT WHERE PRODUCT_ID = UID);
+
+	IF EXISTING_ID = UID THEN
+		SET UID = FLOOR(RAND() * 9999999999999);
+	END IF;
+
+	RETURN UID;
+
+END; //
+
+DELIMITER ; //
+________________________________________________________________________________________________________________________________________________________________________
+#RESULT
+
+mysql> select genUserID();
+    -> //
++-----------------+
+| genUserID()     |
++-----------------+
+| 165830926897513 |
++-----------------+
+
+#COMMENT: This is PRONE TO DUPLICATES
+________________________________________________________________________________________________________________________________________________________________________
+
+
+
+This is the Real Deal (Below) Updated on: July-28, 2022
+
+DELIMITER //
+DROP FUNCTION IF EXISTS genLongItemID //
+CREATE FUNCTION genLongItemID()	RETURNS BIGINT
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+	DECLARE UID BIGINT DEFAULT 0;
+	DECLARE EXISTING_ID BIGINT DEFAULT 0;
+
+	SET UID = FLOOR(RAND() * 9999999999999);
+
+	SET EXISTING_ID = (SELECT PRODUCT_ID FROM PRODUCT WHERE PRODUCT_ID = UID);
+
+	IF EXISTING_ID = UID THEN
+		SET UID = FLOOR(RAND() * 9999999999999);
+	END IF;
+
+	RETURN UID;
+
+END; //
+
+DELIMITER ; //
+
+_______________________________________________________________
+#INT
+DELIMITER //
+DROP FUNCTION IF EXISTS genIntegerItemID //
+CREATE FUNCTION genIntegerItemID()	RETURNS INTEGER
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+	DECLARE UID BIGINT DEFAULT 0;
+	DECLARE EXISTING_ID BIGINT DEFAULT 0;
+
+	SET UID = FLOOR(RAND() * 999999999);
+
+	SET EXISTING_ID = (SELECT PRODUCT_ID FROM PRODUCT WHERE PRODUCT_ID = UID);
+
+	IF EXISTING_ID = UID THEN
+		SET UID = FLOOR(RAND() * 999999999);
+	END IF;
+
+	RETURN UID;
+
+END; //
+
+DELIMITER ; //
+
+
+______________________________________________________
+#LONG USER ID
+
+
+DELIMITER //
+CREATE FUNCTION genUserID()	RETURNS BIGINT
+READS SQL DATA
+DETERMINISTIC
+BEGIN
+	DECLARE UID BIGINT DEFAULT 0;
+	DECLARE TIME_NOW VARCHAR(20);
+	DECLARE STRING_1 VARCHAR(20);
+	DECLARE STRING_2 VARCHAR(20);
+
+	SET TIME_NOW = UNIX_TIMESTAMP(now());
+
+	SET UID = FLOOR(RAND() * 999999);
+
+	SET STRING_1 = '' + TIME_NOW;
+	SET STRING_2 = '' + UID;
+
+	SET STRING_1 = CONCAT(STRING_1, STRING_2);
+
+	RETURN CAST(STRING_1 AS UNSIGNED INTEGER);
+
+END; //
+
+

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.dave.apis</groupId>
-  <artifactId>batian</artifactId>
-  <name>BatianAPI</name>
+  <groupId>com.dave.apis.BatianAPI</groupId>
+  <artifactId>BatianAPI</artifactId>
+  <name>BatianAPIAPI</name>
   <version>0.0.1-SNAPSHOT</version>
-  <description>For learning full-stack (CRUD) operational API  development</description>
+  <description>BatianAPI project. Auto-Generated on Thu Jul 28 15:46:17 EAT 2022 by Dave's CodeGen for Dropwizard API Apps (https://github.com/david-matu/)</description>
   <build>
     <plugins>
       <plugin>
@@ -125,11 +125,12 @@
     </dependencies>
   </dependencyManagement>
   <properties>
-    <dropwizard-jdbi.version>2.0.0-rc9</dropwizard-jdbi.version>
+    <mysql-connector.version>8.0.29</mysql-connector.version>
     <dropwizard.version>2.1.0</dropwizard.version>
-    <mainClass>com.dave.apis.batian.BatianAPIApplication</mainClass>
-    <smoketurner-swagger.version>2.0.0-1</smoketurner-swagger.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <mainClass>com.dave.apis.BatianAPI.BatianAPIApplication</mainClass>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <smoketurner-swagger.version>2.0.12-1</smoketurner-swagger.version>
+    <dropwizard-jdbi.version>2.0.0-rc9</dropwizard-jdbi.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>
